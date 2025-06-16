@@ -75,8 +75,6 @@ To install this package:
 
       streamlit run AIML_PhonePe_Streamlit.py
 
-- This will start the dashboard locally at http://localhost:8501.
-
 2. Interact with the dashboard:
 
 - In the sidebar, choose between:
