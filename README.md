@@ -57,7 +57,7 @@ To install this package:
 
 3. Run the application:
 
-        streamlit run python AIML_PhonePe_Streamlit.py
+        streamlit run AIML_PhonePe_Streamlit.py
 
 ### Prerequisites
 - Python 3.x installed on your system.
