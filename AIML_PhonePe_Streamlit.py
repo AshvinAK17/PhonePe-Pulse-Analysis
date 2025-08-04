@@ -6,7 +6,7 @@ import plotly.express as px
 import seaborn as sns
 
 # ---------- PAGE CONFIG ----------
-st.set_page_config(page_title="📊 PhonePe Pulse Dashboard", layout="wide")
+st.set_page_config(page_title=" PhonePe Pulse Dashboard", layout="wide")
 
 # ---------- DB CONNECTION ----------
 @st.cache_resource
@@ -45,7 +45,7 @@ def check_and_warn_empty(df, message="No data available to plot."):
 
 # ---------- PAGE 1: CHOROPLETH ----------
 def india_overview_page(cursor):
-    st.title("🗺️ India Transaction Overview")
+    st.title(" India Transaction Overview")
 
     # Filter years and quarters without nulls in agg_trans
     cursor.execute("SELECT DISTINCT Year FROM agg_trans WHERE Year IS NOT NULL ORDER BY Year;")
@@ -94,7 +94,7 @@ def india_overview_page(cursor):
 
 # ---------- PAGE 2: BUSINESS CASES ----------
 def business_case_analysis(cursor):
-    st.title("🧩 Business Case Analysis")
+    st.title(" Business Case Analysis")
 
     # Filter years and quarters without nulls in agg_trans (used for consistency)
     cursor.execute("SELECT DISTINCT Year FROM agg_trans WHERE Year IS NOT NULL ORDER BY Year;")
@@ -119,7 +119,7 @@ def business_case_analysis(cursor):
         st.header("Decoding Transaction Dynamics on PhonePe")
 
         # Query 1
-        st.subheader("📊 Year-wise Total Transaction Amount by State")
+        st.subheader(" Year-wise Total Transaction Amount by State")
         query1 = f"""
         SELECT State, Year, SUM(Transaction_amount) AS Total_amount
         FROM agg_trans
@@ -140,7 +140,7 @@ def business_case_analysis(cursor):
         plt.clf()
 
         # Query 2
-        st.subheader("📈 Quarterly Transaction Count by Transaction Type")
+        st.subheader(" Quarterly Transaction Count by Transaction Type")
         query2 = f"""
         SELECT Transaction_type, Year, Quarter, SUM(Transaction_count) AS Total_count
         FROM agg_trans
@@ -160,7 +160,7 @@ def business_case_analysis(cursor):
         plt.clf()
 
         # Query 3
-        st.subheader("🗺️ State-wise Total Transaction Amount (Choropleth)")
+        st.subheader(" State-wise Total Transaction Amount (Choropleth)")
         query3 = f"""
         SELECT State, SUM(Transaction_amount) AS Total_amount
         FROM agg_trans
@@ -184,7 +184,7 @@ def business_case_analysis(cursor):
         st.header("Device Dominance and User Engagement Analysis")
 
         # Query 4
-        st.subheader("📱 Top Device Brands by Total Registrations")
+        st.subheader(" Top Device Brands by Total Registrations")
         query4 = f"""
         SELECT Brand, SUM(Count) AS Total_Registrations
         FROM agg_user
@@ -203,7 +203,7 @@ def business_case_analysis(cursor):
         plt.clf()
 
         # Query 5
-        st.subheader("📱 Brand-wise Avg Registered Users")
+        st.subheader(" Brand-wise Avg Registered Users")
         query5 = f"""
         SELECT Brand, AVG(Count) AS Avg_Users
         FROM agg_user
@@ -224,7 +224,7 @@ def business_case_analysis(cursor):
         st.header("Insurance Penetration and Growth Potential Analysis")
 
         # Query 6
-        st.subheader("📌 State-wise Insurance Amount")
+        st.subheader(" State-wise Insurance Amount")
         query6 = f"""
         SELECT State, SUM(Transaction_amount) AS Total_Insurance_Amount
         FROM agg_ins
@@ -243,7 +243,7 @@ def business_case_analysis(cursor):
         plt.clf()
 
         # Query 7
-        st.subheader("📌 Insurance Transaction Trend by Year and Quarter")
+        st.subheader(" Insurance Transaction Trend by Year and Quarter")
 
         query7 = f"""
         SELECT State, Year, Quarter, SUM(Transaction_amount) AS Total_Insurance_Amount
@@ -295,7 +295,7 @@ def business_case_analysis(cursor):
         st.header("Insurance Engagement Analysis")
 
         # Query 8
-        st.subheader("📌 State-wise Insurance Distribution")
+        st.subheader(" State-wise Insurance Distribution")
         query8 = f"""
         SELECT State, SUM(Transaction_amount) AS Total_Insurance_Amount
         FROM agg_ins
@@ -319,7 +319,7 @@ def business_case_analysis(cursor):
         st.plotly_chart(fig)
 
         # Query 9
-        st.subheader("📌 Quarterly Growth % in Insurance")
+        st.subheader(" Quarterly Growth % in Insurance")
         query9 = f"""
         SELECT State, Year, Quarter, SUM(Transaction_amount) AS Total_Insurance_Amount
         FROM agg_ins
@@ -360,7 +360,7 @@ def business_case_analysis(cursor):
         st.header("Transaction Analysis Across States and Districts")
 
         # Query 10
-        st.subheader("🏙️ Top Performing States")
+        st.subheader(" Top Performing States")
         query10 = f"""
         SELECT State, SUM(Transaction_amount) AS Total_Amount
         FROM top_trans_dist
@@ -376,7 +376,7 @@ def business_case_analysis(cursor):
         st.plotly_chart(px.bar(df10, x='State', y='Total_Amount', title=f"Top States by Amount (Year: {selected_year}, Q{selected_quarter})"))
 
         # Query 11
-        st.subheader("🏘️ Top Districts by Transaction Value & Volume")
+        st.subheader(" Top Districts by Transaction Value & Volume")
         query11 = f"""
         SELECT District, SUM(Transaction_count) AS Total_Transactions, SUM(Transaction_amount) AS Total_Amount
         FROM top_trans_dist
@@ -399,7 +399,7 @@ def business_case_analysis(cursor):
         plt.clf()
 
         # Query 12
-        st.subheader("🏷️ Top Pincodes by Transactions (Horizontal Bar Plot)")
+        st.subheader(" Top Pincodes by Transactions (Horizontal Bar Plot)")
         query12 = f"""
         SELECT pincodes, SUM(Transaction_count) AS Total_Transactions, SUM(Transaction_amount) AS Total_Amount
         FROM top_trans_pinc
@@ -422,10 +422,10 @@ def business_case_analysis(cursor):
 
 # ---------- MAIN APP ----------
 def main():
-    page = st.sidebar.radio("📂 Navigation", ["📍 India Overview (Choropleth)", "🧩 Business Case Analysis"])
-    if page == "📍 India Overview (Choropleth)":
+    page = st.sidebar.radio(" Navigation", [" India Overview (Choropleth)", " Business Case Analysis"])
+    if page == " India Overview (Choropleth)":
         india_overview_page(cursor)
-    elif page == "🧩 Business Case Analysis":
+    elif page == " Business Case Analysis":
         business_case_analysis(cursor)
 
 if __name__ == "__main__":
